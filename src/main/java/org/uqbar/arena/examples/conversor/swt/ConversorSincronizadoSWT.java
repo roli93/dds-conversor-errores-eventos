@@ -20,13 +20,9 @@ import org.eclipse.swt.widgets.Text;
  * @author jfernandes (basado en algún ejemplo de internet, emprolijando un poco)
  */
 public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener {
-	// Constants used for conversions
-	private static final double FIVE_NINTHS = 5.0 / 9.0;
-	private static final double NINE_FIFTHS = 9.0 / 5.0;
-
 	// Widgets used in the window
-	private Text fahrenheit;
-	private Text celsius;
+	private Text millasText;
+	private Text kilometrosText;
 	private Label feedbackLabel;
 
 	/**
@@ -35,7 +31,7 @@ public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener 
 	public void run() {
 		Display display = new Display();
 		Shell shell = new Shell(display);
-		shell.setText("Temperatures");
+		shell.setText("Conversor Sincronizado SWT");
 		this.createContents(shell);
 		shell.pack();
 		shell.open();
@@ -54,24 +50,24 @@ public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener 
 	private void createContents(Shell shell) {
 		shell.setLayout(new GridLayout(3, true));
 
-		// fahrenheit
-		new Label(shell, SWT.LEFT).setText("Fahrenheit:");
-		this.fahrenheit = new Text(shell, SWT.BORDER);
+		// millas
+		new Label(shell, SWT.LEFT).setText("Millas:");
+		this.millasText = new Text(shell, SWT.BORDER);
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
-		this.fahrenheit.setLayoutData(data);
+		this.millasText.setLayoutData(data);
 
-		this.fahrenheit.addVerifyListener(this);
-		this.fahrenheit.addModifyListener(this);
+		this.millasText.addVerifyListener(this);
+		this.millasText.addModifyListener(this);
 
-		// celsius
-		new Label(shell, SWT.LEFT).setText("Celsius:");
-		this.celsius = new Text(shell, SWT.BORDER);
+		// km
+		new Label(shell, SWT.LEFT).setText("Kilometros:");
+		this.kilometrosText = new Text(shell, SWT.BORDER);
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 2;
-		this.celsius.setLayoutData(data);
-		this.celsius.addVerifyListener(this);
-		this.celsius.addModifyListener(this);
+		this.kilometrosText.setLayoutData(data);
+		this.kilometrosText.addVerifyListener(this);
+		this.kilometrosText.addModifyListener(this);
 		
 		// feedback
 		this.feedbackLabel = new Label(shell, SWT.LEFT | SWT.BORDER);
@@ -113,10 +109,10 @@ public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener 
 	@Override
 	public synchronized void modifyText(ModifyEvent event) {
 		// Remove all the listeners (avoid infinite loops)
-		this.celsius.removeVerifyListener(this);
-		this.celsius.removeModifyListener(this);
-		this.fahrenheit.removeVerifyListener(this);
-		this.fahrenheit.removeModifyListener(this);
+		this.kilometrosText.removeVerifyListener(this);
+		this.kilometrosText.removeModifyListener(this);
+		this.millasText.removeVerifyListener(this);
+		this.millasText.removeModifyListener(this);
 
 		Text modifiedText = (Text) event.widget;
 
@@ -124,13 +120,13 @@ public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener 
 			// 
 			int newValue = Integer.parseInt(modifiedText.getText());
 
-			if(modifiedText == this.fahrenheit) {
-				// fahrenheit -> celsius
-				this.celsius.setText(String.valueOf((int) (FIVE_NINTHS * (newValue - 32))));
+			if(modifiedText == this.millasText) {
+				// millas -> km
+				this.kilometrosText.setText(String.valueOf(newValue * 1.60934));
 			}
 			else {
-				// celsius -> fahrenheit 
-				this.fahrenheit.setText(String.valueOf((int) (NINE_FIFTHS * newValue + 32)));
+				// km -> millas
+				this.millasText.setText(String.valueOf(newValue / 1.60934));
 			}
 		}
 		catch(NumberFormatException e) {
@@ -138,10 +134,10 @@ public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener 
 		}
 
 		// Add the listeners back
-		this.celsius.addVerifyListener(this);
-		this.celsius.addModifyListener(this);
-		this.fahrenheit.addVerifyListener(this);
-		this.fahrenheit.addModifyListener(this);
+		this.kilometrosText.addVerifyListener(this);
+		this.kilometrosText.addModifyListener(this);
+		this.millasText.addVerifyListener(this);
+		this.millasText.addModifyListener(this);
 	}
 
 	/**

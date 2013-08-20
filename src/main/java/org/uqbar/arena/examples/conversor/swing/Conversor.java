@@ -1,9 +1,12 @@
 package org.uqbar.arena.examples.conversor.swing;
 
+/**
+ * @author jfernandes
+ */
 public class Conversor {
 
-	public double convertir(double tempCelsius) {
-		return tempCelsius * 1.8 + 32;
+	public double convertir(double millas) {
+		return millas * 1.60934;
 	}
 
 }

@@ -12,7 +12,7 @@ public class Conversor {
 	// ********************************************************
 	
 	public void convertir() {
-		kilometros = millas * 1.60934;
+		this.kilometros = this.millas * 1.60934;
 	}
 	
 	// ********************************************************
