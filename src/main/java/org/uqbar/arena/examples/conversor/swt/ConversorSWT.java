@@ -37,12 +37,15 @@ public class ConversorSWT extends ApplicationWindow {
 		Composite panel = new Composite(parent, SWT.NULL);
 		panel.setLayout(new GridLayout(4, true));
 
+		// millas
 		this.millasLabel = new Label(panel, SWT.NULL);
 		this.millasLabel.setText("Millas: ");
 		this.millasTextBox = new Text(panel, SWT.SINGLE | SWT.BORDER);
 
+		//km
 		this.kilometrosFieldLabel = new Label(panel, SWT.NULL);
 		this.kilometrosFieldLabel.setText("Kilometros: ");
+		
 		this.kilometrosLabel = new Label(panel, SWT.SINGLE | SWT.BORDER);
 		this.kilometrosLabel.setLayoutData(new GridData(GridData.FILL_BOTH));
 
@@ -51,6 +54,7 @@ public class ConversorSWT extends ApplicationWindow {
 		button.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
+				ConversorSWT.this.setStatus("");
 				String selected = ConversorSWT.this.millasTextBox.getText();
 				if(StringUtils.isBlank(selected)) {
 					ConversorSWT.this.kilometrosLabel.setText("");
@@ -66,7 +70,7 @@ public class ConversorSWT extends ApplicationWindow {
 					}
 				}
 			}
-		});
+		});	
 		return panel;
 	}
 

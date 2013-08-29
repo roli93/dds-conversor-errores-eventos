@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Text;
  * @author jfernandes (basado en algún ejemplo de internet, emprolijando un poco)
  */
 public class ConversorSincronizadoSWT implements VerifyListener, ModifyListener {
-	// Widgets used in the window
+	// Widgets
 	private Text millasText;
 	private Text kilometrosText;
 	private Label feedbackLabel;
