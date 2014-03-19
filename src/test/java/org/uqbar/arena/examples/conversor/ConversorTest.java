@@ -17,5 +17,15 @@ public class ConversorTest {
 		double kilometrosExpected = millas * 1.60934;
 		assertEquals(kilometrosExpected, conversor.getKilometros(),0);
 	}
+	
+	@Test
+	public void testConvertirSinSettearLasMillasDa0() {
+		Conversor conversor = new Conversor();
+		
+		conversor.convertir();
+		
+		double kilometrosExpected = 0;
+		assertEquals(kilometrosExpected, conversor.getKilometros(),0);
+	}
 
 }
