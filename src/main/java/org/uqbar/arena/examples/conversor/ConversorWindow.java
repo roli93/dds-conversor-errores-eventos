@@ -3,6 +3,7 @@ package org.uqbar.arena.examples.conversor;
 import java.awt.Color;
 
 import org.uqbar.arena.actions.MessageSend;
+import org.uqbar.arena.examples.conversor.Conversor;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -41,9 +42,10 @@ public class ConversorWindow extends MainWindow<Conversor> {
 
 		new TextBox(mainPanel).bindValueToProperty("millas");
 
-		new Button(mainPanel) //
-			.setCaption("Convertir a kilómetros")
-			.onClick(new MessageSend(this.getModelObject(), "convertir"));
+		//Cambio para mostrar svn
+		Button botonConvertir = new Button(mainPanel);
+		botonConvertir.setCaption("Convertir a kilómetros");
+		botonConvertir.onClick(new MessageSend(this.getModelObject(), "convertir"));
 
 		new Label(mainPanel) //
 			.setBackground(Color.ORANGE)
