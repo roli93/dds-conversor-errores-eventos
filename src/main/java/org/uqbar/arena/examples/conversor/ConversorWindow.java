@@ -42,10 +42,9 @@ public class ConversorWindow extends MainWindow<Conversor> {
 
 		new TextBox(mainPanel).bindValueToProperty("millas");
 
-		//Cambio para mostrar svn
-		Button botonConvertir = new Button(mainPanel);
-		botonConvertir.setCaption("Convertir a kilómetros");
-		botonConvertir.onClick(new MessageSend(this.getModelObject(), "convertir"));
+		new Button(mainPanel)
+			.setCaption("Convertir a kilómetros")
+			.onClick(new MessageSend(this.getModelObject(), "convertir"));
 
 		new Label(mainPanel) //
 			.setBackground(Color.ORANGE)
