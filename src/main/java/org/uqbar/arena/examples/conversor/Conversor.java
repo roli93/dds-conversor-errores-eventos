@@ -5,14 +5,14 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class Conversor {
 	private double lasMillas;
-	private double losKilometros;
+	private double km;
 
 	// ********************************************************
 	// ** Acciones
 	// ********************************************************
 	
 	public void convertir() {
-		this.losKilometros = this.lasMillas * 1.60934;
+		this.km = this.lasMillas * 1.60934;
 	}
 	
 	// ********************************************************
@@ -28,11 +28,11 @@ public class Conversor {
 	}
 
 	public double getKilometros() {
-		return this.losKilometros;
+		return this.km;
 	}
 
 	public void setKilometros(double kilometros) {
-		this.losKilometros = kilometros;
+		this.km = kilometros;
 	}
 
 }
