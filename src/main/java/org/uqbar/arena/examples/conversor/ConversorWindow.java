@@ -23,7 +23,7 @@ import org.uqbar.arena.windows.MainWindow;
  * </ul>
  * 
  * IMPORTANTE: Correr esta clase con el siguiente argumento a la VM
- * -Djava.system.class.loader=org.uqbar.arena.aop.ArenaClassLoader
+ * -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
  * 
  * @author npasserini
  */
