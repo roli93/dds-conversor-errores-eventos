@@ -44,7 +44,7 @@ public class ConversorWindow extends MainWindow<Conversor> {
 
 		new Button(mainPanel)
 			.setCaption("Convertir a kilómetros")
-			.onClick(new MessageSend(this.getModelObject(), "convertir"));
+			.onClick(()-> this.getModelObject().convertir());
 
 		new Label(mainPanel) //
 			.setBackground(Color.ORANGE)

@@ -38,8 +38,6 @@ package org.uqbar.arena.examples.conversor.swing;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -76,12 +74,7 @@ public class ConversorSwing extends JFrame {
 
 		this.convertirButton = new JButton();
 		this.convertirButton.setText("Convertir");
-		this.convertirButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				ConversorSwing.this.convertButtonActionPerformed(evt);
-			}
-		});
+      this.convertirButton.addActionListener(this::convertButtonActionPerformed);
 
 		this.kilometrosLabel.setText("Kilometros");
 		this.configureLayout();
@@ -106,12 +99,7 @@ public class ConversorSwing extends JFrame {
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new ConversorSwing().setVisible(true);
-			}
-		});
+		EventQueue.invokeLater(() ->  new ConversorSwing().setVisible(true));
 	}
 
 }

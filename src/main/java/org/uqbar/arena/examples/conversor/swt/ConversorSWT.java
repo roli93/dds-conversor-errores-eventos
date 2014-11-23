@@ -8,9 +8,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
 /**
@@ -50,23 +48,20 @@ public class ConversorSWT extends ApplicationWindow {
 
 		Button button = new Button(panel, SWT.PUSH);
 		button.setText("Covertir");
-		button.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				ConversorSWT.this.setStatus("");
-				String selected = ConversorSWT.this.millasTextBox.getText();
-				if(StringUtils.isBlank(selected)) {
-					ConversorSWT.this.kilometrosLabel.setText("");
+		button.addListener(SWT.Selection, event -> {
+			ConversorSWT.this.setStatus("");
+			String selected = ConversorSWT.this.millasTextBox.getText();
+			if(StringUtils.isBlank(selected)) {
+				ConversorSWT.this.kilometrosLabel.setText("");
+			}
+			else {
+				try {
+					double millas = Double.parseDouble(selected);
+					double kilometros = millas * 1.60934;
+					ConversorSWT.this.kilometrosLabel.setText(Double.toString(kilometros));
 				}
-				else {
-					try {
-						double millas = Double.parseDouble(selected);
-						double kilometros = millas * 1.60934;
-						ConversorSWT.this.kilometrosLabel.setText(Double.toString(kilometros));
-					}
-					catch (NumberFormatException e) {
-						ConversorSWT.this.setStatus("Millas ingresadas incorrectas !: " + e.getMessage());
-					}
+				catch (NumberFormatException e) {
+					ConversorSWT.this.setStatus("Millas ingresadas incorrectas !: " + e.getMessage());
 				}
 			}
 		});	
