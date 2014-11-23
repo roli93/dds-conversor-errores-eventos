@@ -1,5 +1,6 @@
 package org.uqbar.arena.examples.conversor.swt;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -11,8 +12,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
-
-import com.uqbar.commons.StringUtils;
 
 /**
  * Implementación del Conversor en swt "crudo".
