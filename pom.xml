@@ -12,7 +12,7 @@
 		<dependency>
 			<groupId>org.uqbar-project</groupId>
 			<artifactId>arena-jface</artifactId>
-			<version>3.6.0</version>
+			<version>3.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
