@@ -5,6 +5,7 @@ import java.awt.Color;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.MainWindow;
@@ -39,7 +40,7 @@ public class ConversorWindow extends MainWindow<Conversor> {
 
 		new Label(mainPanel).setText("Ingrese la longitud en millas");
 
-		new TextBox(mainPanel).bindValueToProperty("millas");
+		new NumericField(mainPanel).bindValueToProperty("millas");
 
 		new Button(mainPanel)
 			.setCaption("Convertir a kilómetros")
