@@ -2,8 +2,6 @@ package org.uqbar.arena.examples.conversor;
 
 import java.awt.Color;
 
-import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.examples.conversor.Conversor;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -27,6 +25,7 @@ import org.uqbar.arena.windows.MainWindow;
  * 
  * @author npasserini
  */
+@SuppressWarnings("serial")
 public class ConversorWindow extends MainWindow<Conversor> {
 
 	public ConversorWindow() {
