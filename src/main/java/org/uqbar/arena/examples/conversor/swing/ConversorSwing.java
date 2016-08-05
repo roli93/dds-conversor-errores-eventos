@@ -74,7 +74,7 @@ public class ConversorSwing extends JFrame {
 
 		this.convertirButton = new JButton();
 		this.convertirButton.setText("Convertir");
-      this.convertirButton.addActionListener(this::convertButtonActionPerformed);
+		this.convertirButton.addActionListener(this::convertButtonActionPerformed);
 
 		this.kilometrosLabel.setText("Kilometros");
 		this.configureLayout();
@@ -82,7 +82,7 @@ public class ConversorSwing extends JFrame {
 	}
 
 	protected void configureLayout() {
-		this.getContentPane().setLayout(new GridLayout(2,2, 10, 10));
+		this.getContentPane().setLayout(new GridLayout(2, 2, 10, 10));
 		this.getContentPane().add(this.millasTextField);
 		this.getContentPane().add(this.millasLabel);
 		this.getContentPane().add(this.convertirButton);
@@ -96,10 +96,11 @@ public class ConversorSwing extends JFrame {
 	}
 
 	/**
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 */
 	public static void main(String args[]) {
-		EventQueue.invokeLater(() ->  new ConversorSwing().setVisible(true));
+		EventQueue.invokeLater(() -> new ConversorSwing().setVisible(true));
 	}
 
 }
