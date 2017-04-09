@@ -9,6 +9,9 @@ import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
 import org.uqbar.arena.windows.MessageBox;
+import org.uqbar.arena.windows.SimpleWindow;
+import org.uqbar.arena.windows.Window;
+import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.model.UserException;
 import org.uqbar.ui.view.ErrorViewer;
 
@@ -26,23 +29,30 @@ import org.uqbar.ui.view.ErrorViewer;
  * @author npasserini
  */
 @SuppressWarnings("serial")
-public class ConversorWindow extends MainWindow<Conversor> {
+//Utilizamos una SimpleWindow, que se encarga sola
+//de manejar cualquier UserException que sea lanzada
+public class ConversorWindow extends SimpleWindow<Conversor> {
 
-	public ConversorWindow() {
-		super(new Conversor());
+	public ConversorWindow(WindowOwner owner) {
+		super(owner, new Conversor());
+		
+		//Una SimpleWindow nos permite setear una descripcion de la tarea
+		//Si no ponemos nada, quedara un espacio en blanco
+		this.setTaskDescription("Para convertir presione \"Convertir\"");
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
+	protected void createFormPanel(Panel mainPanel) {
+		
 		this.setTitle("Conversor de millas a kilómetros");
 		mainPanel.setLayout(new VerticalLayout());
 
-		new Label(mainPanel).setText("Ingrese la longitud en millas");
+		new Label(mainPanel).setText("Ingrese las millas a convertir");
 
 		new NumericField(mainPanel).bindValueToProperty("millas");
 
 		new Button(mainPanel)
-			.setCaption("Convertir a kilómetros")
+			.setCaption("Convertir")
 			.onClick(() -> convertir());
 
 		new Label(mainPanel) //
@@ -55,30 +65,17 @@ public class ConversorWindow extends MainWindow<Conversor> {
 		.setBackground(Color.YELLOW)
 		.bindValueToProperty("metros");
 
-		new Label(mainPanel).setText("metros");
-		
+		new Label(mainPanel).setText("metros");	
 	}
 	
 	public void convertir(){
-		//Atrapamos la excepción del modelo, para transofrmarla en un mensaje amigable
-		//al usuario y seguir propagándola hacia él (Nótese que no estamos realmente manejándola)
-		try{
-			this.getModelObject().convertir();			
-		}
-		catch(UserException e){
-			showErrorMessageBox(e.getMessage());
-		}
+		this.getModelObject().convertir();			
 	}
 	
-	protected void showErrorMessageBox(String message) {
-		//Creamos la MessageBox pasándole como padre esta ventana (this) para que cuando se cierre sepa
-		//a qué ventana devolverle el control de la aplicación 
-		MessageBox messageBox = new MessageBox(this, MessageBox.Type.Error);
-		messageBox.setMessage(message);
-		messageBox.open();
+	@Override
+	protected void addActions(Panel mainPanel) {
+		//Una SimpleWindow nos permite agregar una serie de botones con acciones al pie.
+		//Por ahora no lo utilizaremos
 	}
 
-	public static void main(String[] args) {
-		new ConversorWindow().startApplication();
-	}
 }
