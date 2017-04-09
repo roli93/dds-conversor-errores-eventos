@@ -60,6 +60,8 @@ public class ConversorWindow extends MainWindow<Conversor> {
 	}
 	
 	public void convertir(){
+		//Atrapamos la excepción del modelo, para transofrmarla en un mensaje amigable
+		//al usuario y seguir propagándola hacia él (Nótese que no estamos realmente manejándola)
 		try{
 			this.getModelObject().convertir();			
 		}
