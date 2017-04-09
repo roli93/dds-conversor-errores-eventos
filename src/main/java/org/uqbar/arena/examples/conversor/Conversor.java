@@ -14,7 +14,7 @@ public class Conversor {
 	// ********************************************************
 	
 	public void convertir() {
-		//Como ese converson tambien muestra los metros y no queremos mostrar
+		//Como este conversor tambien muestra los metros y no queremos mostrar
 		//valores muy grandes, no dejamos convertir mas de 1000 millas
 		if(this.millas > 1000){
 			throw new UserException("Ingrese un valor menor a 1000");

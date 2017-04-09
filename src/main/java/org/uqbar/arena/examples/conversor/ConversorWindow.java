@@ -9,8 +9,8 @@ import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
 import org.uqbar.arena.windows.MessageBox;
-import org.uqbar.commons.model.UserException;
 import org.uqbar.ui.view.ErrorViewer;
+
 
 /**
  * Ejemplo de conversor de medidas con el framework Arena. Es una ventana que tiene como modelo una instancia
@@ -26,7 +26,7 @@ import org.uqbar.ui.view.ErrorViewer;
  * @author npasserini
  */
 @SuppressWarnings("serial")
-public class ConversorWindow extends MainWindow<Conversor> {
+public class ConversorWindow extends MainWindow<Conversor> implements ErrorViewer {
 
 	public ConversorWindow() {
 		super(new Conversor());
@@ -34,6 +34,11 @@ public class ConversorWindow extends MainWindow<Conversor> {
 
 	@Override
 	public void createContents(Panel mainPanel) {
+		
+		//Asignamos un error viewer a la ventana, que será el encargado de saber qué
+		//hacer cuando haya un error. En este caso la misma ventana es su propio error viewer
+		this.getDelegate().setErrorViewer(this);
+		
 		this.setTitle("Conversor de millas a kilómetros");
 		mainPanel.setLayout(new VerticalLayout());
 
@@ -60,23 +65,35 @@ public class ConversorWindow extends MainWindow<Conversor> {
 	}
 	
 	public void convertir(){
-		//Atrapamos la excepción del modelo, para transofrmarla en un mensaje amigable
-		//al usuario y seguir propagándola hacia él (Nótese que no estamos realmente manejándola)
-		try{
-			this.getModelObject().convertir();			
-		}
-		catch(UserException e){
-			showErrorMessageBox(e.getMessage());
-		}
+		this.getModelObject().convertir();			
+	}
+	
+	@Override
+	public void showError(String message) {
+		//Este es el método que se va a ejecutar cada vez que haya un error en las ventanas que tienen 
+		//a este Error Viewer steteado. Acá mostramos el Message Box de error
+		showErrorMessageBox(message);
 	}
 	
 	protected void showErrorMessageBox(String message) {
+		//Creamos la MessageBox pasándole como padre esta ventana (this) para que cuando se cierre sepa
+		//a qué ventana devolverle el control de la aplicación 
 		MessageBox messageBox = new MessageBox(this, MessageBox.Type.Error);
 		messageBox.setMessage(message);
 		messageBox.open();
 	}
-
+	
 	public static void main(String[] args) {
 		new ConversorWindow().startApplication();
+	}
+	
+	@Override
+	public void showInfo(String message) {
+		//Este método no nos importa por ahora, lo dejamos que no haga nada
+	}
+
+	@Override
+	public void showWarning(String message) {
+		//Este método no nos importa por ahora, lo dejamos que no haga nada
 	}
 }
