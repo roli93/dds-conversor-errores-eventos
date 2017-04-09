@@ -8,6 +8,9 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.NumericField;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.MessageBox;
+import org.uqbar.commons.model.UserException;
+import org.uqbar.ui.view.ErrorViewer;
 
 /**
  * Ejemplo de conversor de medidas con el framework Arena. Es una ventana que tiene como modelo una instancia
@@ -40,13 +43,35 @@ public class ConversorWindow extends MainWindow<Conversor> {
 
 		new Button(mainPanel)
 			.setCaption("Convertir a kilómetros")
-			.onClick(()-> this.getModelObject().convertir());
+			.onClick(() -> convertir());
 
 		new Label(mainPanel) //
 			.setBackground(Color.ORANGE)
 			.bindValueToProperty("kilometros");
-
+		
 		new Label(mainPanel).setText(" kilómetros");
+		
+		new Label(mainPanel) //
+		.setBackground(Color.YELLOW)
+		.bindValueToProperty("metros");
+
+		new Label(mainPanel).setText("metros");
+		
+	}
+	
+	public void convertir(){
+		try{
+			this.getModelObject().convertir();			
+		}
+		catch(UserException e){
+			showErrorMessageBox(e.getMessage());
+		}
+	}
+	
+	protected void showErrorMessageBox(String message) {
+		MessageBox messageBox = new MessageBox(this, MessageBox.Type.Error);
+		messageBox.setMessage(message);
+		messageBox.open();
 	}
 
 	public static void main(String[] args) {
