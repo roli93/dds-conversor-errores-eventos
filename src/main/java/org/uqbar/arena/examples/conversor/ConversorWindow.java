@@ -71,6 +71,8 @@ public class ConversorWindow extends MainWindow<Conversor> {
 	}
 	
 	protected void showErrorMessageBox(String message) {
+		//Creamos la MessageBox pasándole como padre esta ventana (this) para que cuando se cierre sepa
+		//a qué ventana devolverle el control de la aplicación 
 		MessageBox messageBox = new MessageBox(this, MessageBox.Type.Error);
 		messageBox.setMessage(message);
 		messageBox.open();
